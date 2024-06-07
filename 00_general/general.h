@@ -6,6 +6,7 @@
 
 /*--时钟--*/
 #define __Clock 12000000
+#define __PERIOD 6
 
 /*--sitdo--*/
 #define u8 unsigned char

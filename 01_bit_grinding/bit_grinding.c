@@ -1,6 +1,8 @@
 #include "bit_grinding.h"
 
 
+/* 位操作函数 */
+
 #if (setBit_function_Switch  == __on)
 /**
  * @brief 设置指定位置的位为1
@@ -15,6 +17,7 @@ void setBit (uint8_t* num, uint8_t n) {
 }
 #endif
 
+// ----------------------------------------------------------------------------
 
 #if (clearBit_function_Switch  == __on)
 /**
@@ -31,6 +34,7 @@ void clearBit (uint8_t* num, uint8_t n) {
 }
 #endif
 
+// ---------------------------------------------------------------------------
 
 #if (toggleBit_function_Switch  == __on)
 /**
@@ -47,6 +51,7 @@ void toggleBit (uint8_t* num, uint8_t n) {
 }
 #endif
 
+// ----------------------------------------------------------------------------
 
 #if (checkBit_function_Switch  == __on)
 /**
@@ -65,6 +70,7 @@ uint8_t checkBit (uint8_t* num, uint8_t n) {
 }
 #endif
 
+// ----------------------------------------------------------------------------
 
 #if (shift_low_function_Switch  == __on)
 /**
@@ -80,6 +86,8 @@ uint8_t shift_low (uint8_t hex) {
     return (hex << 4);
 }
 #endif
+
+// ----------------------------------------------------------------------------
 
 #if (shift_high_function_Switch  == __on)
 /**
@@ -98,16 +106,19 @@ uint8_t shift_high (uint8_t hex) {
 }
 #endif
 
+// ============================================================================
+
+/* 整数运算函数 */
 
 #if (SQUARE_function_Switch  == __on)
 /**
  * 计算给定数字的乘方。
  *
- * @param num 底数，类型为 uint32_t。
+ * @param num 底数，类型为 uint16_t。
  * @param exponent 指数，非负整数，类型为 uint8_t。
  * @return 计算结果，如果底数为0且指数为正，则返回0；如果指数为0，则返回1。
  */
-uint32_t square (uint16_t num, uint8_t exponent) {
+uint16_t square(uint16_t num, uint8_t exponent) {
     if (num == 0 && exponent > 0) {
         return 0;
     }
@@ -115,7 +126,7 @@ uint32_t square (uint16_t num, uint8_t exponent) {
         return 1;
     }
 
-    uint32_t result = 1;
+    uint16_t result = 1;
     for (uint8_t i = 0; i < exponent; ++i) {
         result *= num;
         // 检查结果是否溢出，虽然在此场景下不太可能达到千万级别后才溢出
@@ -125,45 +136,48 @@ uint32_t square (uint16_t num, uint8_t exponent) {
 }
 #endif
 
+// -------------------------------------------------------------------------------
 
 #if (INTEGER_SPLITTING_function_Switch  == __on)
 /**
- * 将一个大整数拆分为数字数组中的一个元素
+ * 将一个整数拆分为数字数组中的一个元素
  *
- * 该函数将一个大整数（num）拆分成为由各个十进制数字组成的一维数组中的某一位数字。
+ * 该函数将一个整数（num）拆分成为由各个十进制数字组成的一维数组中的某一位数字。
  * 具体而言，它计算 num 除以 10 的 n 次方再取余 10 所得的值，并将这个值返回。
  *
- * @param num 需要拆分的大整数。
+ * @param num 需要拆分的整数。
  * @param n 指定将拆分得到的数字的位置（从0开始计数）。
  * @return 返回 num 在其十进制表示中第 n+1 位的数字。
  */
-uint8_t Integer_splitting (uint32_t num, uint8_t n) {
+uint8_t Integer_splitting (uint16_t num, uint8_t n) {
     // 确保n在有效范围内，避免除以0
     if (n > 9) {
         return 0; // 或者根据实际情况处理错误情况，比如返回-1表示错误
     }
 
     // 计算10的n次方
-    uint32_t power_of_ten = square(10, n);
+    uint16_t power_of_ten = square(10, n);
 
     // 计算并返回结果
     return (num / power_of_ten) % 10;
 }
 #endif
 
+// -----------------------------------------------------------------------------
 
 #if (CHECK_BIT_function_Switch  == __on)
 /**
- * 检查一个长整型数的位数。
- * @param num 需要检查位数的长整型数。
+ * 检查一个整型数的位数。
+ * @param num 需要检查位数的整型数。
  * @return 返回数num的位数。
  */
-uint8_t check_bit (uint32_t num) {
+uint8_t check_bit (uint16_t num) {
     uint8_t n = 0; // 初始化计数器n为0
-    while (num !=0) { // 当num不为0时，继续循环
+    while (num != 0) { // 当num不为0时，继续循环
         n ++; // 每次循环，计数器n自增1
         num /= 10; // 将num除以10，以便逐位检查
     }
     return n; // 返回计数器n的值，即num的位数
 }
 #endif
+

@@ -14,6 +14,8 @@
 #include "general.h"
 
 
+/* 位操作函数 */
+
 #define setBit_function_Switch  __on
 #if (setBit_function_Switch  == __on)
 void setBit (uint8_t* num, uint8_t n);
@@ -45,20 +47,22 @@ uint8_t shift_high (uint8_t hex);
 #endif
 
 
+/* 整数操作函数 */
+
 #define SQUARE_function_Switch  __on
 #if (SQUARE_function_Switch  == __on)
-uint32_t square (uint16_t num, uint8_t exponent);
+uint16_t square(uint16_t num, uint8_t exponent);
 #endif
 
 #define INTEGER_SPLITTING_function_Switch  __on
 #if (INTEGER_SPLITTING_function_Switch  == __on)
-uint8_t Integer_splitting (uint32_t num, uint8_t n);
+uint8_t Integer_splitting(uint16_t num, uint8_t n);
 #endif
 
 
 #define CHECK_BIT_function_Switch  __on
 #if (CHECK_BIT_function_Switch  == __on)
-uint8_t check_bit (uint32_t num);
+uint8_t check_bit(uint16_t num);
 #endif
 
 
